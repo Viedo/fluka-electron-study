@@ -1,0 +1,31 @@
+* Technical installation smoke test; not yet run with FLUKA.
+TITLE
+Smoke test: 1 MeV photons incident on a water box
+DEFAULTS                                                              PRECISIO
+FREE
+* BEAM WHAT(1) < 0 selects kinetic energy in GeV.
+BEAM -0.001 0.0 0.0 0.0 0.0 1.0 PHOTON
+* x, y, z [cm]; x/y direction cosines = 0; default z direction = +z.
+BEAMPOS 0.0 0.0 -1.0 0.0 0.0 0.0
+GEOBEGIN 0.0 0.0 0.0 0.0 0.0 0.0 COMBNAME
+    0    0          Water box inside vacuum and blackhole shell
+SPH outer 0.0 0.0 0.0 100000.0
+SPH world 0.0 0.0 0.0 100.0
+RPP target -5.0 5.0 -5.0 5.0 0.0 10.0
+END
+BLKHOLE 5 +outer -world
+VACREG 5 +world -target
+WATREG 5 +target
+END
+GEOEND 0.0 0.0 0.0 0.0 0.0 0.0
+ASSIGNMA BLCKHOLE BLKHOLE BLKHOLE 1.0 0.0 0.0
+ASSIGNMA VACUUM VACREG VACREG 1.0 0.0 0.0
+ASSIGNMA WATER WATREG WATREG 1.0 0.0 0.0
+* Cartesian ENERGY density [GeV/cm3 per unit primary weight].
+* First line: type, quantity, unit, xmax, ymax, zmax, detector name.
+USRBIN 10.0 ENERGY -21.0 5.0 5.0 10.0 EDEP
+* Continuation: xmin, ymin, zmin, nx, ny, nz, continuation marker.
+USRBIN -5.0 -5.0 0.0 21.0 21.0 20.0 &
+RANDOMIZ 1.0 1234567.0 0.0 0.0 0.0 0.0
+START 1000.0 0.0 0.0 0.0 0.0 0.0
+STOP

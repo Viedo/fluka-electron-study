@@ -1,0 +1,45 @@
+TITLE
+500 MeV electrons on lead wall - photon spectrum and air dose
+DEFAULTS                                                              PRECISIO
+FREE
+* Technical assumptions: 500 MeV kinetic electrons, 20 pC per pulse.
+* Transverse Gaussian sigma = 1 mm in x and y.
+* FLUKA BEAM negative widths are FWHM: 2.35482 mm = 0.235482 cm.
+* Pulse duration is Gaussian with 100 ns FWHM; transport scores the integrated pulse.
+BEAM -0.5 0.0 0.0 -0.235482 -0.235482 0.0 ELECTRON
+BEAMPOS 0.0 0.0 -1.0 0.0 0.0 0.0
+FIXED
+GEOBEGIN                                                              COMBNAME
+    0    0          Lead target and air scoring slab
+SPH outer 0.0 0.0 0.0 100000.0
+SPH world 0.0 0.0 0.0 100.0
+RPP target -5.0 5.0 -5.0 5.0 0.0 10.0
+RPP dosebin -5.0 5.0 -5.0 5.0 29.5 30.5
+END
+BLKHOLE 5 +outer -world
+AIRREG 5 +world -target -dosebin
+LEADREG 5 +target
+AIRDET 5 +dosebin
+END
+GEOEND
+FREE
+ASSIGNMA BLCKHOLE BLKHOLE BLKHOLE 1.0 0.0 0.0
+ASSIGNMA AIR AIRREG AIRREG 1.0 0.0 0.0
+ASSIGNMA LEAD LEADREG LEADREG 1.0 0.0 0.0
+ASSIGNMA AIR AIRDET AIRDET 1.0 0.0 0.0
+* Deposited energy in the lead target [GeV/cm3 per primary].
+USRBIN 10.0 ENERGY -21.0 5.0 5.0 10.0 EDEP
+USRBIN -5.0 -5.0 0.0 31.0 31.0 30.0 &
+* Electromagnetic and total absorbed dose in air 20 cm behind the wall.
+* Detector slab: 10 x 10 x 1 cm; dose is scored in GeV/g per primary.
+USRBIN 10.0 DOSE-EM -21.0 5.0 5.0 30.5 DEMAIR
+USRBIN -5.0 -5.0 29.5 31.0 31.0 1.0 &
+USRBIN 10.0 DOSE -21.0 5.0 5.0 30.5 DTOT
+USRBIN -5.0 -5.0 29.5 31.0 31.0 1.0 &
+* Photon differential fluence spectrum in the air slab [cm-2 GeV-1 per primary].
+* Log bins from 1 keV to 500 MeV; detector volume is 100 cm3.
+USRTRACK -1.0 PHOTON -22.0 AIRDET 100.0 100.0 GAMMAS
+USRTRACK 0.5 0.000001 0.0 0.0 0.0 0.0                                 &
+RANDOMIZ 1.0 24681357.0 0.0 0.0 0.0 0.0
+START 100000.0 0.0 0.0 0.0 0.0 0.0
+STOP

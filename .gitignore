@@ -1,0 +1,19 @@
+# Keep code and input definitions; generated runs are local scientific records.
+/runs/*
+!/runs/README.md
+/reports/generated/
+/data/local/
+/installers/*
+!/installers/README.md
+/scratch/*
+!/scratch/README.md
+__pycache__/
+.venv/
+*.pyc
+.env
+.env.local
+/config/windows.local.conf
+*.swp
+*~
+Thumbs.db
+.DS_Store

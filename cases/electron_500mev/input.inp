@@ -1,0 +1,38 @@
+* Technical electron-beam template; not yet run with FLUKA.
+* User proposal: electrons, nominal energy 0.5 GeV, lead target.
+* Kinetic energy interpretation and remaining settings are assumptions.
+TITLE
+Technical example: 500 MeV electrons incident on a lead box
+DEFAULTS                                                              PRECISIO
+FREE
+* BEAM WHAT(1) < 0 selects kinetic energy in GeV; 0.5 GeV = 500 MeV.
+* Pencil beam, monoenergetic, zero divergence: technical assumptions.
+BEAM -0.5 0.0 0.0 0.0 0.0 1.0 ELECTRON
+* x, y, z [cm]; x/y direction cosines = 0; default z direction = +z.
+BEAMPOS 0.0 0.0 -1.0 0.0 0.0 0.0
+FIXED
+GEOBEGIN                                                              COMBNAME
+    0    0          Example lead box; target dimensions not yet agreed
+SPH outer 0.0 0.0 0.0 100000.0
+SPH world 0.0 0.0 0.0 100.0
+RPP target -5.0 5.0 -5.0 5.0 0.0 10.0
+END
+BLKHOLE 5 +outer -world
+VACREG 5 +world -target
+LEADREG 5 +target
+END
+GEOEND
+FREE
+ASSIGNMA BLCKHOLE BLKHOLE BLKHOLE 1.0 0.0 0.0
+ASSIGNMA VACUUM VACREG VACREG 1.0 0.0 0.0
+ASSIGNMA LEAD LEADREG LEADREG 1.0 0.0 0.0
+* Example ENERGY scoring in lead, not a full energy-containment model.
+* Cartesian density [GeV/cm3 per unit primary weight].
+* First line: type, quantity, unit, xmax, ymax, zmax, detector name.
+USRBIN 10.0 ENERGY -21.0 5.0 5.0 10.0 EDEP
+* Continuation: xmin, ymin, zmin, nx, ny, nz, continuation marker.
+* Refined technical scoring grid: about 0.32 cm per bin in x/y and 0.33 cm in z.
+USRBIN -5.0 -5.0 0.0 31.0 31.0 30.0 &
+RANDOMIZ 1.0 7654321.0 0.0 0.0 0.0 0.0
+START 10000.0 0.0 0.0 0.0 0.0 0.0
+STOP

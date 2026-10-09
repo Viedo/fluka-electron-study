@@ -1,0 +1,26 @@
+PODSUMOWANIE SYMULACJI FLUKA — ELEKTRONY NA BLOK OŁOWIU
+ID przebiegu: 20261009T070639Z_electron_wall_n5xWPPVP
+Status: finished_needs_review
+Czas rozpoczęcia (UTC): 2026-10-09T07:06:53Z
+Czas zakończenia (UTC): 2026-10-09T07:57:59Z
+Łączny czas obliczeń: 0 godz. 51 min 6 s
+Liczba cykli FLUKA: 1
+Ukończone historie pierwotne: 100000
+
+CO SYMULUJEMY
+Elektrony o energii kinetycznej 500 MeV padają prostopadle na blok Pb 10 × 10 × 10 cm. Ładunek paczki wynosi 20 pC (około 1,2483 × 10^8 elektronów); poprzeczny profil jest gaussowski, sigma_x = sigma_y = 1 mm.
+Dawka pochłonięta jest liczona w powietrzu 10, 20 i 50 cm za tylną powierzchnią bloku, jeśli dany przebieg zawiera te detektory. Widma fluencji fotonów zapisują się dla tych odległości; widma neutronów, elektronów i pozytonów — w 20 cm.
+Przyjęty czasowy FWHM 100 ns nie jest rozdzielany w transporcie. Podane wartości są zintegrowane po paczce, nie oznaczają dawki szczytowej ani mocy dawki.
+
+WYNIKI POSTPROCESSINGU
+Maksymalna dawka 20 cm (DOSE-EM / DOSE): 0.00016591862 / 0.00016591862 Gy/paczkę
+Fluencja fotonów 20 cm: 611047.05 cm^-2/paczkę
+
+PRZEGLĄD I OGRANICZENIA
+Pojedynczy cykl nie daje niezależnej oceny niepewności między cyklami.
+FLUKA zgłosiła automatyczne rozpoznanie materiału AIR; skład i gęstość wymagają potwierdzenia.
+Ostrzeżenia BLCCRE: dopasowanie parametrów materiałowych dla rozpraszania Coulomba przekroczyło cel 1%; maks. błąd 54.5% przy beta2=0.37014; maks. błąd 1.1% przy beta2=0.00358. Transport się zakończył, ale wpływ ostrzeżeń wymaga przeglądu.
+Energia, profil i kierunek wiązki, ładunek, geometria i warunki powietrza pozostają założeniami technicznymi, jeśli nie potwierdzono ich pomiarem. Wynik nie jest walidacją osłony ani oceną bezpieczeństwa radiologicznego.
+
+Pliki przebiegu: /mnt/hgfs/FLUKA/runs/20261009T070639Z_electron_wall_n5xWPPVP
+Wyniki i wykresy: /home/proman/Desktop/FLUKA-wyniki/20261009T070639Z_electron_wall_n5xWPPVP

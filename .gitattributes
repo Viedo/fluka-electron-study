@@ -1,0 +1,8 @@
+* text=auto
+*.inp text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.cmd text eol=crlf
+*.conf text eol=lf
